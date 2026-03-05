@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karate Academy | 極真会</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Roboto + Oswald -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ----- RESET & BASE ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fafafa;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+        img {
+            max-width: 100%;
+            display: block;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+            color: #222;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #c4302b;
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+        .btn {
+            display: inline-block;
+            background: #c4302b;
+            color: #fff;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: background 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .btn:hover {
+            background: #a02520;
+        }
+
+        /* ----- HEADER / NAVIGATION (responsive) ----- */
+        header {
+            background: #111;
+            color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: 'Oswald', sans-serif;
+        }
+        .logo span {
+            color: #c4302b;
+        }
+        .nav ul {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav a:hover {
+            color: #c4302b;
+        }
+        /* hamburger menu (hidden by default) */
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        #menu-checkbox {
+            display: none;
+        }
+
+        /* ----- HERO SECTION ----- */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1555597673-b21d5c935865?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+        }
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ----- ABOUT ----- */
+        .about {
+            background: #fff;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .about-text p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        .about-image img {
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* ----- CLASSES (cards) ----- */
+        .classes {
+            background: #f4f4f4;
+        }
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+        }
+        .card i {
+            font-size: 3rem;
+            color: #c4302b;
+            margin-bottom: 1rem;
+        }
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .card p {
+            color: #666;
+        }
+
+        /* ----- SCHEDULE TABLE ----- */
+        .schedule {
+            background: #fff;
+        }
+        .schedule table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .schedule th, .schedule td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        .schedule th {
+            background: #c4302b;
+            color: #fff;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+        }
+        .schedule tr:last-child td {
+            border-bottom: none;
+        }
+        .schedule td:first-child {
+            font-weight: 600;
+            background: #f9f9f9;
+        }
+
+        /* ----- INSTRUCTORS ----- */
+        .instructors {
+            background: #f4f4f4;
+        }
+        .instructors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+        }
+        .instructor-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .instructor-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            border: 4px solid #c4302b;
+        }
+        .instructor-card h3 {
+            margin-bottom: 0.3rem;
+        }
+        .instructor-card .rank {
+            color: #c4302b;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+        }
+        .instructor-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* ----- CONTACT & MAP ----- */
+        .contact {
+            background: #fff;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+        .contact-info {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 10px;
+        }
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #222;
+        }
+        .contact-info p {
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .contact-info i {
+            width: 25px;
+            color: #c4302b;
+            font-size: 1.2rem;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .map-container {
+            margin-top: 2rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* ----- FOOTER ----- */
+        footer {
+            background: #111;
+            color: #fff;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .social-links a {
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        .social-links a:hover {
+            color: #c4302b;
+        }
+        .director-line {
+            margin: 0.8rem 0 0.3rem;
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #c4302b;
+            letter-spacing: 1px;
+        }
+        .director-line i {
+            margin: 0 0.3rem;
+        }
+        .footer-bottom {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 0.5rem;
+        }
+
+        /* ----- RESPONSIVE DESIGN ----- */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            .nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #111;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.4s ease;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.5);
+            }
+            #menu-checkbox:checked ~ .nav {
+                max-height: 300px; /* enough for links */
+            }
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+                padding: 1.5rem 0;
+                gap: 1.2rem;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .about-grid, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .schedule table {
+                font-size: 0.9rem;
+            }
+            .schedule th, .schedule td {
+                padding: 0.5rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .hero-content p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER with responsive navigation -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">極真 <span>KARATE</span></div>
+            <input type="checkbox" id="menu-checkbox" style="display: none;">
+            <label for="menu-checkbox" class="menu-toggle"><i class="fas fa-bars"></i></label>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#classes">Classes</a></li>
+                    <li><a href="#schedule">Schedule</a></li>
+                    <li><a href="#instructors">Instructors</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section id="home" class="hero">
+            <div class="container hero-content">
+                <h1>Find Your Inner Warrior</h1>
+                <p>Traditional Karate for discipline, fitness, and self-defense. Join our dojo today.</p>
+                <a href="#contact" class="btn">Start Your Journey</a>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">About Our Dojo</h2>
+                <div class="about-grid">
+                    <div class="about-text">
+                        <p>Founded in 1995, our academy follows the principles of traditional Shotokan karate. We emphasize discipline, respect, and continuous self-improvement. Whether you're a beginner or an advanced martial artist, our dojo offers a supportive environment to grow.</p>
+                        <p>Our certified instructors have decades of combined experience and are dedicated to helping students of all ages achieve their goals — from fitness and confidence to competition and self-defense.</p>
+                        <p>We believe karate is not just about learning to fight, but about building character. Join us and become part of a community that values hard work and mutual respect.</p>
+                        <a href="#contact" class="btn">Visit Us</a>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1555597673-b21d5c935865?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Karate training session">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CLASSES SECTION -->
+        <section id="classes" class="classes">
+            <div class="container">
+                <h2 class="section-title">Our Classes</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <i class="fas fa-child"></i>
+                        <h3>Kids Karate (5-12)</h3>
+                        <p>Build confidence, focus, and coordination in a fun, safe environment. Ages 5-12.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-user-graduate"></i>
+                        <h3>Adult Karate</h3>
+                        <p>Improve fitness, learn self-defense, and relieve stress. All skill levels welcome.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Self-Defense</h3>
+                        <p>Practical techniques for real-world situations. Perfect for beginners.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-trophy"></i>
+                        <h3>Competition Team</h3>
+                        <p>For advanced students wanting to compete in kata and kumite tournaments.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCHEDULE SECTION -->
+        <section id="schedule" class="schedule">
+            <div class="container">
+                <h2 class="section-title">Weekly Schedule</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                            <th>Saturday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>10:00 - 11:00</td>
+                            <td>Kids (5-8)</td>
+                            <td>—</td>
+                            <td>Kids (5-8)</td>
+                            <td>—</td>
+                            <td>Kids (5-8)</td>
+                            <td>Family Class</td>
+                        </tr>
+                        <tr>
+                            <td>11:30 - 12:30</td>
+                            <td>Kids (9-12)</td>
+                            <td>—</td>
+                            <td>Kids (9-12)</td>
+                            <td>—</td>
+                            <td>Kids (9-12)</td>
+                            <td>Family Class</td>
+                        </tr>
+                        <tr>
+                            <td>17:00 - 18:30</td>
+                            <td>Adult Basics</td>
+                            <td>Adult Advanced</td>
+                            <td>Adult Basics</td>
+                            <td>Adult Advanced</td>
+                            <td>Open Sparring</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>19:00 - 20:30</td>
+                            <td>Self-Defense</td>
+                            <td>Competition</td>
+                            <td>Self-Defense</td>
+                            <td>Competition</td>
+                            <td>Kata Practice</td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- INSTRUCTORS SECTION -->
+        <section id="instructors" class="instructors">
+            <div class="container">
+                <h2 class="section-title">Meet Our Instructors</h2>
+                <div class="instructors-grid">
+                    <div class="instructor-card">
+                        <img src="https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Sensei Tanaka">
+                        <h3>Hiroshi Tanaka</h3>
+                        <p class="rank">6th Dan, Chief Instructor</p>
+                        <p>35 years of experience. Former national champion, specializing in kata and kumite.</p>
+                    </div>
+                    <div class="instructor-card">
+                        <img src="https://images.unsplash.com/photo-1531427186627-4fd839abc6d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Sensei Yamamoto">
+                        <h3>Kenji Yamamoto</h3>
+                        <p class="rank">4th Dan, Adult Program</p>
+                        <p>Expert in self-defense and conditioning. Passionate about helping adults achieve fitness.</p>
+                    </div>
+                    <div class="instructor-card">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Sensei Nakamura">
+                        <h3>Yuki Nakamura</h3>
+                        <p class="rank">3rd Dan, Kids Program</p>
+                        <p>Specializes in children's development and makes learning fun and engaging.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION with MAP -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">Contact & Location</h2>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Get in Touch</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Budo Street, Tokyo, 100-0001</p>
+                        <p><i class="fas fa-phone-alt"></i> +81 (0)3-1234-5678</p>
+                        <p><i class="fas fa-envelope"></i> info@kyokushin-dojo.jp</p>
+                        <p><i class="far fa-clock"></i> Mon-Fri: 9am - 9pm, Sat: 9am - 2pm</p>
+                        <h3 style="margin-top: 2rem;">Send us a message</h3>
+                        <form class="contact-form">
+                            <input type="text" placeholder="Your Name" required>
+                            <input type="email" placeholder="Email Address" required>
+                            <textarea placeholder="Your Message..." required></textarea>
+                            <button type="submit" class="btn">Send Message</button>
+                        </form>
+                    </div>
+                    <div class="map-container">
+                        <!-- Google Maps embed placeholder (Tokyo) -->
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.8278533985255!2d139.76493611525874!3d35.6812365361376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188bfbd89f700b%3A0x277c49ba34ed38!2sTokyo%20Station!5e0!3m2!1sen!2sjp!4v1617779200000!5m2!1sen!2sjp" width="100%" height="100%" style="border:0; min-height: 400px;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER (with the addition: run by Sumit Sir) -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <!-- Added line: Academy run by Sumit Sir -->
+            <div class="director-line">
+                <i class="fas fa-dharmachakra"></i> Academy run by Sumit Sir <i class="fas fa-dharmachakra"></i>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 極真 Karate Academy. All rights reserved. | Bushido spirit.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
